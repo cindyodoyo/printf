@@ -16,26 +16,26 @@
 int handlePrint(const char *fmt, int *ind, va_list list, char buffer[],
 		int flags, int width, int precision, int size)
 {
-	int b, unknow_len = 0, printed_chars = -1;
+	int b, unknow_len = 0, Printed_chars = -1;
 
-	fmt_t fmt_types[] = {
-
-		{'c', print_char}, {'s', print_string}, {'%', print_percent},
+	fmt_t fmt_types[] =
+	{
+		{'c', output_char}, {'s', output_string}, {'%', outputt_percent},
 
 		{'i', print_int}, {'d', print_int}, {'b', print_binary},
 
-		{'u', print_unsigned}, {'o', print_octal}, {'x', print_hexadecimal},
+		{'u', printUnsigned}, {'o', printOctal}, {'x', printHexadecimal},
 
-		{'X', print_hexa_upper}, {'p', print_pointer}, {'S', print_non_printable},
+		{'X', printHexaUpper}, {'p', printPointer}, {'S', printNonPrintable},
 
-		{'r', print_reverse}, {'R', print_rot13string}, {'\0', NULL}
+		{'r', printReversed}, {'R', printRot13String}, {'\0', NULL}
 	};
 
 	for (b = 0; fmt_types[b].fmt != '\0'; b++)
 
-		if (fmt[*ind] == fmt_types[b].fmt)
+		if (fmt[*ind] == fmt_types[b]fmt)
 			return (fmt_types[b].fn(list, buffer, flags, width, precision, size));
-	if (fmt_types[b]fmt == '\0')
+	if (fmt_types[b].fmt == '\0')
 	{
 		if (fmt[*ind] == '\0')
 			return (-1);
