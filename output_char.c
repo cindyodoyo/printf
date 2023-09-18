@@ -78,7 +78,6 @@ int output_string(va_list types, char buffer[],
 		}
 	}
 	return (write(1, str, length));
-
 }
 
 /************************* OUTPUT PERCENT SIGN *************************/
@@ -145,7 +144,6 @@ int print_int(va_list types, char buffer[],
 	}
 
 	while (num > 0)
-
 	{
 		buffer[b--] = (num % 10) + '0';
 		num /= 10;

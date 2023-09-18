@@ -24,7 +24,7 @@
  * @fmt: The format.
  * @fn: The function associated.
  */
-struct fmt
+struct format
 {
 	char fmt;
 	int (*fn)(va_list, char[], int, int, int, int);
@@ -32,12 +32,12 @@ struct fmt
 
 
 /**
- * typedef struct fmt fmt_t - Struct op
+ * typedef struct format fmt_t - Struct op
  *
  * @fmt: The format.
  * @fm_t: The function associated.
  */
-typedef struct fmt fmt_t;
+typedef struct format fmt_t;
 
 int _printf(const char *format, ...);
 void putchar_buffer(char buffer[], int *current_buffer);

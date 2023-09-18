@@ -162,7 +162,6 @@ int printRot13String(va_list args, char buffer[],
 	char input[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 	char output[] = "NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm";
 
-
 	UNUSED(buffer);
 	UNUSED(flags);
 	UNUSED(width);
@@ -173,27 +172,28 @@ int printRot13String(va_list args, char buffer[],
 
 	if (string == NULL)
 		string = "(AHYY)";
-	for (m = 0; string[m]; m++)
+	if (string != NULL)
 	{
-		for (n = 0; input[n]; n++)
+		for (m = 0; string[m]; m++)
 		{
-			if (input[n] == string[m])
+			for (n = 0; input[n]; n++)
 			{
-				character = output[n];
+				if (input[n] == string[m])
+				{
+					character = output[n];
+					write(1, &character, 1);
+					counter++;
+					break;
+				}
+			}
+			if (!input[n])
+			{
+				character = string[m];
 				write(1, &character, 1);
 				counter++;
-				break;
 			}
 		}
-
-		if (!input[n])
-		{
-			character = string[m];
-			write(1, &character, 1);
-			counter++;
-		}
 	}
-
 	return (counter);
 }
 

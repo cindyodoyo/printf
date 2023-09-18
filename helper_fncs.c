@@ -71,7 +71,7 @@ long int convertSizeNumber(long int number, int size)
 }
 
 /**
- * convertSizeUnsigned - Casts an unsigned number to the specified size
+ * convertSizeUnsgnd - Casts an unsigned number to the specified size
  * @number: Unsigned number to be casted.
  * @size: Size specifier indicating the type to be casted.
  *
