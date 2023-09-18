@@ -74,9 +74,11 @@ int output_string(va_list types, char buffer[],
 			for (b = width - length; b > 0; b--)
 				write(1, " ", 1);
 			write(1, &str[0], length);
-			return (width - length);
+			return (width);
 		}
 	}
+	return (write(1, str, length));
+
 }
 
 /************************* OUTPUT PERCENT SIGN *************************/

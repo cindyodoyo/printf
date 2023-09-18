@@ -26,14 +26,14 @@ int handlePrint(const char *fmt, int *ind, va_list list, char buffer[],
 
 		{'u', printUnsigned}, {'o', printOctal}, {'x', printHexadecimal},
 
-		{'X', printHexaUpper}, {'p', printPointer}, {'S', printNonPrintable},
+		{'X', printHexadecimalUpper}, {'p', printPointer}, {'S', printNonPrintable},
 
 		{'r', printReversed}, {'R', printRot13String}, {'\0', NULL}
 	};
 
 	for (b = 0; fmt_types[b].fmt != '\0'; b++)
 
-		if (fmt[*ind] == fmt_types[b]fmt)
+		if (fmt[*ind] == fmt_types[b].fmt)
 			return (fmt_types[b].fn(list, buffer, flags, width, precision, size));
 	if (fmt_types[b].fmt == '\0')
 	{
@@ -55,5 +55,5 @@ int handlePrint(const char *fmt, int *ind, va_list list, char buffer[],
 		unknow_len += write(1, &fmt[*ind], 1);
 		return (unknow_len);
 	}
-	return (printed_chars);
+	return (Printed_chars);
 }
