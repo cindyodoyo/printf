@@ -144,7 +144,6 @@ int print_int(va_list types, char buffer[],
 	}
 
 	while (num > 0)
-
 	{
 		buffer[b--] = (num % 10) + '0';
 		num /= 10;
