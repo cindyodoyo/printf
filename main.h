@@ -21,12 +21,12 @@
 /**
  * struct format - Struct op
  *
- * @format: The format.
+ * @fmt: The format.
  * @fn: The function associated.
  */
-struct format
+struct fmt
 {
-	char format;
+	char fmt;
 	int (*fn)(va_list, char[], int, int, int, int);
 };
 
@@ -37,7 +37,7 @@ struct format
  * @fmt: The format.
  * @fm_t: The function associated.
  */
-typedef struct format fmt_t;
+typedef struct fmt fmt_t;
 
 int _printf(const char *format, ...);
 void putchar_buffer(char buffer[], int *current_buffer);
@@ -88,7 +88,7 @@ int writeNumber(int isNegative, int index_m, char buffer[],
 		int flags, int width, int precision, int size);
 int writePointer(char buffer[], int index, int length,
 		int width, int flags, char paddingChar, char extraChar, int paddingStart);
-int writeUnsigned(int isNegative, int index,
+int writeUnsgnd(int isNegative, int index,
 		char buffer[], int flags, int width, int precision, int size);
 int writeNum(int index, char buffer[], int flags, int width, int precision,
 		int length, char paddingChar, char extraChar);
@@ -101,7 +101,7 @@ int appendHexaCode(char asciiCode, char buffer[], int startIndex);
 int isDigit(char character);
 int isPrintable(char character);
 long int convertSizeNumber(long int number, int size);
-unsigned long int convertSizeUnsigned(unsigned long int number, int size);
+unsigned long int convertSizeUnsgnd(unsigned long int number, int size);
 
 #endif /* MAIN_H */
 

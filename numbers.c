@@ -62,7 +62,7 @@ int printOctal(va_list args, char buffer[], int flags,
 	while (number > 0)
 	{
 		buffer[m--] = (number % 8) + '0';
-		num /= 8;
+		number /= 8;
 	}
 
 	if (flags & F_HASH && value != 0)
@@ -144,7 +144,7 @@ int printHex(va_list args, char mapToArray[], char buffer[], int flags,
 
 	if (flags & F_HASH && value != 0)
 	{
-		buffer[m--] = flag_ch;
+		buffer[m--] = flagCh;
 		buffer[m--] = '0';
 	}
 

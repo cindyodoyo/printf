@@ -60,8 +60,7 @@ int writeNumber(int isNegative, int index_m, char buffer[],
 		int flags, int width, int precision, int size)
 {
 	int length = BUFF_SIZE - index_m - 1;
-	char paddingChar = ' ';
-	char CharS = 0;
+	char paddingChar = ' ', CharS = 0;
 
 	UNUSED(size);
 
@@ -76,7 +75,7 @@ int writeNumber(int isNegative, int index_m, char buffer[],
 		CharS = ' ';
 
 	return (writeNum(index_m, buffer, flags, width, precision,
-				length, paddingChar, extraChar));
+				length, paddingChar, CharS));
 }
 
 /**
@@ -85,55 +84,55 @@ int writeNumber(int isNegative, int index_m, char buffer[],
  * @buffer: Buffer array to handle print.
  * @flags: Calculates active flags.
  * @width: Width specifier.
- * @precision: Precision specifier.
+ * @prec: Precision specifier.
  * @length: Number length.
  * @paddingChar: Padding character.
  * @extraChar: Extra character.
  *
  * Return: Number of characters printed.
  */
-int writeNum(int index, char buffer[], int flags, int width, int precision,
+int writeNum(int index, char buffer[], int flags, int width, int prec,
 		int length, char paddingChar, char extraChar)
 {
 	int m, paddingStart = 1;
 
-	if (precision == 0 && index == BUFF_SIZE - 2 && buffer[index] == '0'
-			&& width == 0)
+	if (prec == 0 && index == BUFF_SIZE - 2 && buffer[index] == '0' && width == 0)
 		return (0);
-	if (precision > 0 && precision < length)
+	if (prec == 0 && index == BUFF_SIZE - 2 && buffer[index] == '0')
+		buffer[index] = paddingChar = ' ';
+	if (prec > 0 && prec < length)
 		paddingChar = ' ';
-
 	while (precision > length)
-	{
-		buffer[--index] = '0';
+		buffer[--index] = '0', length++;
+	if (extraChar != '0')
 		length++;
-	}
-
-	if ((flags & F_ZERO) && !(flags & F_MINUS))
-		paddingChar = '0';
 	if (width > length)
 	{
-		for (m = 0; m < width - length; m++)
+		for (m = 0; m < width - length + 1; m++)
 			buffer[m] = paddingChar;
-
 		buffer[m] = '\0';
-
-		if (flags & F_MINUS)
+		if (flags & F_MINUS && paddingChar == ' ')
 		{
 			if (extraChar)
 				buffer[--index] = extraChar;
-			return (write(1, &buffer[index], length) + write(1, &buffer[0], m));
+			return (write(1, &buffer[index], length) + write(1, &buffer[1], m - 1));
 		}
-		else
+		else if (!(flags & F_MINUS) && paddingChar == ' ')
 		{
 			if (extraChar)
 				buffer[--index] = extraChar;
-			return (write(1, &buffer[0], m) + write(1, &buffer[index], length));
+			return (write(1, &buffer[1], m - 1) + write(1, &buffer[index], length));
+		}
+		else if (!(flags & F_MINUS) && paddingChar == '0')
+		{
+			if (extraChar)
+				buffer[--paddingStart] = extraChar;
+			return (write(1, &buffer[paddingStart], m - paddingStart) + write(1,
+						&buffer[index], length - (1 - paddingStart)));
 		}
 	}
 	if (extraChar)
 		buffer[--index] = extraChar;
-
 	return (write(1, &buffer[index], length));
 }
 
@@ -149,7 +148,7 @@ int writeNum(int index, char buffer[], int flags, int width, int precision,
  *
  * Return: Number of characters printed.
  */
-int writeUnsigned(int isNegative, int index,
+int writeUnsgnd(int isNegative, int index,
 		char buffer[], int flags, int width, int precision, int size)
 {
 	int length = BUFF_SIZE - index - 1, m = 0;
@@ -212,36 +211,37 @@ int writePointer(char buffer[], int index, int length,
 		for (m = 3; m < width - length + 3; m++)
 			buffer[m] = paddingChar;
 		buffer[m] = '\0';
-
-		if (flags & F_MINUS)
+		if (flags & F_MINUS && paddingChar == ' ')
 		{
 			buffer[--index] = 'x';
 			buffer[--index] = '0';
-
 			if (extraChar)
 				buffer[--index] = extraChar;
-
 			return (write(1, &buffer[index], length) + write(1, &buffer[3], m - 3));
 		}
-		else
+		else if (!(flags & F_MINUS) && paddingChar == ' ')
 		{
 			buffer[--index] = 'x';
 			buffer[--index] = '0';
-
 			if (extraChar)
 				buffer[--index] = extraChar;
-
 			return (write(1, &buffer[3], m - 3) + write(1, &buffer[index], length));
+		}
+		else if (!(flags & F_MINUS) && paddingChar == '0')
+		{
+			if (extraChar)
+				buffer[-- paddingStart] = extraChar;
+			buffer[1] = '0';
+			buffer[2] = 'x';
+			return (write(1, &buffer[paddingStart], m - paddingStart) + write(1,
+						&buffer[index], length - (1 - paddingStart) - 2));
 		}
 	}
 
 	buffer[--index] = 'x';
 	buffer[--index] = '0';
-
-
 	if (extraChar)
 		buffer[--index] = extraChar;
-
 	return (write(1, &buffer[index], BUFF_SIZE - index - 1));
 }
 

@@ -83,10 +83,10 @@ int printNonPrintable(va_list args, char buffer[],
 
 	while (string[m] != '\0')
 	{
-		if (isPrintable(string[i]))
+		if (isPrintable(string[m]))
 			buffer[m + start] = string[m];
 		else
-			start += appendHexadecimalCode(string[m], buffer, m + start);
+			start += appendHexaCode(string[m], buffer, m + start);
 
 		m++;
 	}

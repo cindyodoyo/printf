@@ -1,4 +1,4 @@
-#include "main.h";
+#include "main.h"
 
 void putchar_buffer(char buffer[], int *current_buffer);
 
@@ -45,7 +45,7 @@ int _printf(const char *format, ...)
 			printed_chars += output;
 		}
 	}
-	putchar_buffer(buffer, current_buffer);
+	putchar_buffer(buffer, &current_buffer);
 
 	va_end(args);
 	return (printed_chars);
@@ -61,7 +61,7 @@ int _printf(const char *format, ...)
 void putchar_buffer(char buffer[], int *current_buffer)
 {
 	if (*current_buffer > 0)
-		write(1, &buffer[0], *cuurent_buffer);
+		write(1, &buffer[0], *current_buffer);
 	*current_buffer = 0;
 }
 
