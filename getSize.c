@@ -3,7 +3,7 @@
 /**
  * getSize -function cCalculates the size the argument printed
  * @format: pointer to a string that prints arguments
- * i: variable pointer to the formatted arguments 
+ * @i: variable pointer to the formatted arguments
  * Return: return precision
  */
 
