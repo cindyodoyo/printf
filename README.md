@@ -1,1 +1,1 @@
-writing a printf function project by collaborators Slomon Musyoki and Cynthia Odoyo
+writing a printf function project by collaborators Solomon Musyoki and Cynthia Odoyo

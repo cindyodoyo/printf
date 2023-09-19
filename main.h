@@ -40,7 +40,6 @@ struct format
 typedef struct format fmt_t;
 
 int _printf(const char *format, ...);
-void putchar_buffer(char buffer[], int *current_buffer);
 
 /*print char_string.c prototypes*/
 int output_char(va_list types, char buffer[],
@@ -101,7 +100,7 @@ int appendHexaCode(char asciiCode, char buffer[], int startIndex);
 int isDigit(char character);
 int isPrintable(char character);
 long int convertSizeNumber(long int number, int size);
-unsigned long int convertSizeUnsgnd(unsigned long int number, int size);
+long int convertSizeUnsgnd(unsigned long int number, int size);
 
 #endif /* MAIN_H */
 
