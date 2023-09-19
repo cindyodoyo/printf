@@ -77,7 +77,7 @@ long int convertSizeNumber(long int number, int size)
  *
  * Return: Casted value of num
  */
-unsigned long int convertSizeUnsgnd(unsigned long int number, int size)
+long int convertSizeUnsgnd(unsigned long int number, int size)
 {
 	if (size == S_LONG)
 		return (number);
