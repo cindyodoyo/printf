@@ -120,7 +120,7 @@ int printHexadecimalUpper(va_list args, char buffer[], int flags,
  * Return: Number of characters printed
  */
 int printHex(va_list args, char mapToArray[], char buffer[], int flags,
-		char flagCh, int width, int precision, int size)
+		char flag_ch, int width, int precision, int size)
 {
 	int m = BUFF_SIZE - 2;
 	unsigned long int number = va_arg(args, unsigned long int);
@@ -144,7 +144,7 @@ int printHex(va_list args, char mapToArray[], char buffer[], int flags,
 
 	if (flags & F_HASH && value != 0)
 	{
-		buffer[m--] = flagCh;
+		buffer[m--] = flag_ch;
 		buffer[m--] = '0';
 	}
 
