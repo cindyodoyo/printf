@@ -104,7 +104,7 @@ int writeNum(int index, char buffer[], int flags, int width, int prec,
 		paddingChar = ' ';
 	while (prec > length)
 		buffer[--index] = '0', length++;
-	if (extraChar != '0')
+	if (extraChar != 0)
 		length++;
 	if (width > length)
 	{
